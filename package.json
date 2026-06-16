@@ -1,0 +1,30 @@
+{
+  "name": "idkit-x",
+  "version": "1.0.0",
+  "description": "Zero-dependency ID generation library — nanoid, UUID v4/v7, ULID, Snowflake, ObjectId",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --import tsx --test tests/index.test.ts"
+  },
+  "keywords": ["id", "uuid", "ulid", "nanoid", "snowflake", "objectid", "unique", "identifier", "zero-dependency"],
+  "author": "sulthonzh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sulthonzh/idkit-x"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.5.0"
+  }
+}

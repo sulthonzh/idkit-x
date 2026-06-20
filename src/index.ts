@@ -4,6 +4,8 @@
  * Generators: nanoid, UUID v4/v7, ULID, Snowflake, ObjectId
  */
 
+export const VERSION = '1.1.0';
+
 // ─── Random Bytes ────────────────────────────────────────────
 
 function random(size: number): Uint8Array {

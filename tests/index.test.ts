@@ -6,7 +6,19 @@ import {
   ulid, ulidTime, isUlid, monotonicUlid,
   Snowflake,
   objectId, objectIdTime, isObjectId,
+  VERSION,
 } from '../src/index.js';
+
+import pkg from '../package.json' assert { type: 'json' };
+
+describe('VERSION', () => {
+  test('VERSION is valid semver', () => {
+    assert.match(VERSION, /^\d+\.\d+\.\d+$/);
+  });
+  test('VERSION matches package.json', () => {
+    assert.equal(VERSION, pkg.version);
+  });
+});
 
 describe('nanoid', () => {
   test('default size is 21', () => {

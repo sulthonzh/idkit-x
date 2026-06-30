@@ -9,7 +9,7 @@ import {
   VERSION,
 } from '../src/index.js';
 
-import pkg from '../package.json' assert { type: 'json' };
+import pkg from '../package.json' with { type: 'json' };
 
 describe('VERSION', () => {
   test('VERSION is valid semver', () => {

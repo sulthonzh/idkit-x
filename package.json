@@ -26,7 +26,17 @@
     "test:core": "node --import tsx --test tests/index.test.ts",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["id", "uuid", "ulid", "nanoid", "snowflake", "objectid", "unique", "identifier", "zero-dependency"],
+  "keywords": [
+    "id",
+    "uuid",
+    "ulid",
+    "nanoid",
+    "snowflake",
+    "objectid",
+    "unique",
+    "identifier",
+    "zero-dependency"
+  ],
   "author": "sulthonzh",
   "license": "MIT",
   "repository": {
@@ -34,6 +44,7 @@
     "url": "https://github.com/sulthonzh/idkit-x"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@types/node": "^24.0.0",
     "tsx": "^4.0.0",
     "typescript": "^6.0.0"

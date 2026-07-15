@@ -106,6 +106,23 @@ describe('ulid', () => {
     const now = Date.now();
     assert.ok(monotonicUlid(now) < monotonicUlid(now));
   });
+  test('monotonicUlid handles many IDs in same ms', () => {
+    const now = Date.now();
+    const ids: string[] = [];
+    for (let i = 0; i < 5000; i++) ids.push(monotonicUlid(now));
+    const unique = new Set(ids);
+    assert.equal(unique.size, ids.length, 'all IDs should be unique');
+    for (let i = 1; i < ids.length; i++) {
+      assert.ok(ids[i] > ids[i - 1], `ID ${i} should be strictly greater: ${ids[i]} vs ${ids[i-1]}`);
+    }
+  });
+  test('monotonicUlid accepts new timestamp after old ones', () => {
+    const t1 = 1000000;
+    const t2 = 2000000;
+    monotonicUlid(t1);
+    const id2 = monotonicUlid(t2);
+    assert.ok(ulidTime(id2) === t2);
+  });
 });
 
 describe('Snowflake', () => {
@@ -131,6 +148,27 @@ describe('Snowflake', () => {
     assert.throws(() => new Snowflake(undefined, -1), RangeError);
     assert.throws(() => new Snowflake(undefined, 32), RangeError);
     assert.throws(() => new Snowflake(undefined, 0, 32), RangeError);
+  });
+  test('parse recovers sequence', () => {
+    const sf = new Snowflake();
+    const id1 = sf.generate();
+    const p = sf.parse(id1);
+    assert.ok(p.sequence >= 0n);
+    assert.equal(typeof p.timestamp, 'bigint');
+  });
+  test('custom epoch produces correct timestamp', () => {
+    const epoch = Date.now() - 10000;
+    const sf = new Snowflake(epoch, 0, 0);
+    const id = sf.generate();
+    const p = sf.parse(id);
+    assert.ok(p.timestamp >= 0n);
+    assert.ok(p.date.getTime() >= epoch);
+  });
+  test('workerId and datacenterId 0 are valid', () => {
+    const sf = new Snowflake(1288834974657, 0, 0);
+    const p = sf.parse(sf.generate());
+    assert.equal(p.workerId, 0n);
+    assert.equal(p.datacenterId, 0n);
   });
 });
 

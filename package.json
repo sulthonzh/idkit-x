@@ -22,8 +22,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "node --import tsx --test tests/index.test.ts",
-    "test:core": "node --import tsx --test tests/index.test.ts",
+    "test": "node --import tsx --test tests/index.test.ts tests/coverage-gaps.test.ts",
+    "test:core": "node --import tsx --test tests/index.test.ts tests/coverage-gaps.test.ts",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

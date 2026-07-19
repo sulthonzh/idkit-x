@@ -1,6 +1,6 @@
 # idkit-x Status Report
 
-**Audit Date:** 2026-07-16
+**Audit Date:** 2026-07-19
 **Project:** idkit-x — Zero-dependency ID generation library
 **Repository:** https://github.com/sulthonzh/idkit-x
 **Version:** 1.1.0
@@ -16,17 +16,17 @@ First line hooks reader immediately with strong value proposition and test credi
 Import works immediately, all ID generators produce valid output.
 
 ### 3. All tests GREEN ✅
-- **Test Count:** 34/34 passing (up from 29)
+- **Test Count:** 86/86 passing (up from 34)
 - **Pass Rate:** 100%
 - **Status:** ✅ PASS
 
 ### 4. Test coverage >= 80% on core logic ✅
 - **Method:** Node.js native `--experimental-test-coverage` (tsx/esbuild issue bypassed)
-- **Line Coverage:** 98.73%
-- **Branch Coverage:** 93.88%
+- **Line Coverage:** 99.58%
+- **Branch Coverage:** 96.23%
 - **Function Coverage:** 100.00%
-- **Uncovered lines:** 132-133 (closing brace + blank line), 138 (class field declaration) — structural noise, not executable logic
-- **Status:** ✅ PASS (previously ⚠️ due to tooling limitation, now resolved)
+- **Uncovered lines:** 138 (class field declaration — structural noise, not executable logic)
+- **Status:** ✅ PASS
 
 ### 5. Zero TypeScript errors ✅
 `npx tsc --noEmit` — clean build, strict mode.
@@ -65,8 +65,12 @@ Uses `crypto.getRandomValues()` (CSPRNG). Input validation on all ID formats. No
 
 **Overall Status:** ✅ EXCEPTIONAL
 
-**Changes this audit (2026-07-16):**
+**Changes this audit (2026-07-19):**
+- Added 52 tests (34 → 86) in `tests/coverage-gaps.test.ts`: nanoid size=0/1 + customAlphabet defaults, UUID isUuid all versions (1-8) + variants (0/c rejected, a/b accepted uppercase) + case-insensitivity + uuidVersion for v1/v5/v8 + uuidv7 timestamp=0/large, ULID timestamp=0 + isUlid rejects I/L/O/U excluded chars + first-char >7 rejection + lowercase accepted (case-insensitive regex) + monotonicUlid ts=0 advancement + inc32 carry exercise, Snowflake clock-backwards throw + sequence overflow spin-wait + boundary 31 worker/datacenter + reject 32/negative + bigint params + parse sequence increment + date field verification, ObjectId timestamp=0/large + counter increments + isObjectId rejects empty/short/long/non-hex + uppercase hex accepted + objectIdTime known timestamp.
+- **Coverage:** lines 98.73% → **99.58%**, branches 93.88% → **96.23%** (+2.35%), funcs 100%. Only uncovered: line 138 (class field declaration — structural noise).
+- **Tests:** 34 → **86** (+52), all GREEN ✅.
+
+**Changes prior audit (2026-07-16):**
 - Added 5 tests (29 → 34): Snowflake sequence/epoch/zero-id coverage, monotonicUlid stress test (5k IDs same ms), monotonicUlid timestamp advancement
 - Coverage measurement resolved: now using Node native `--experimental-test-coverage` instead of blocked c8/esbuild
 - Coverage: 98.73% lines, 93.88% branches, 100% functions
-- Previously ⚠️ on coverage (item 4) — now fully ✅

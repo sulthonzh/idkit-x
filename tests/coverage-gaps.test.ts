@@ -2,7 +2,7 @@ import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   nanoid, customAlphabet,
-  uuidv4, uuidv7, isUuid, uuidVersion,
+  uuidv7, isUuid, uuidVersion,
   ulid, ulidTime, isUlid, monotonicUlid,
   Snowflake,
   objectId, objectIdTime, isObjectId,
@@ -174,9 +174,9 @@ describe('coverage-gaps: Snowflake edge cases', () => {
     // Mock Date.now to go backwards
     const originalNow = Date.now;
     const baseTime = originalNow();
-    let callCount = 0;
+    let _callCount = 0;
     Date.now = () => {
-      callCount++;
+      _callCount++;
       // First call for generate above already happened.
       // Return baseTime - 1000 to simulate clock going backwards
       return baseTime - 1000;

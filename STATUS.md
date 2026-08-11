@@ -1,6 +1,6 @@
 # idkit-x Status Report
 
-**Audit Date:** 2026-07-31 (re-audited 2026-07-19)
+**Audit Date:** 2026-08-12 (re-audited 2026-07-19)
 **Re-Verified:** 2026-08-12 (UTC 2026-08-12 21:47) — 87/87 tests GREEN (1.2s). ESLint clean. No changes since last audit.
 **Prior:** 2026-08-10 (UTC 2026-08-09 20:24) — 87/87 tests GREEN (2.8s). ESLint clean. No changes since last audit.
 **Prior:** 2026-08-09 (UTC 2026-08-09 02:50) — 87/87 tests GREEN (3.3s). ESLint clean. No changes since last audit.
@@ -69,7 +69,7 @@ Uses `crypto.getRandomValues()` (CSPRNG). Input validation on all ID formats. No
 |------|-------|-------|----------|-------|-------|--------|
 | 2026-07-16 | 34 | 98.73% | 93.88% | 100% | 98.73% | Initial coverage measurement |
 | 2026-07-19 | 86 | 99.15% | 96.07% | 100% | 99.15% | +52 tests (coverage-gaps.test.ts) |
-| 2026-07-31 | **87** | **100%** | **98.03%** | **100%** | **100%** | +1 test (spin-wait path lines 180-181) |
+| 2026-08-12 | **87** | **100%** | **98.03%** | **100%** | **100%** | +1 test (spin-wait path lines 180-181) |
 
 ## 📋 File Breakdown
 
@@ -89,7 +89,7 @@ Uses `crypto.getRandomValues()` (CSPRNG). Input validation on all ID formats. No
 
 **Overall Status:** ✅ EXCEPTIONAL
 
-**Changes this audit (2026-07-31):**
+**Changes this audit (2026-08-12):**
 - Added 1 test (86 → 87) in `tests/coverage-gaps-2.test.ts`: Snowflake sequence overflow spin-wait path covering lines 180-181 (the `while (ts <= this.lastTs)` loop body in `generate()`). Uses Date.now mock that freezes time for 4097 calls then advances 10ms, forcing seq overflow → spin-wait → exit.
 - **Coverage:** stmts 99.15%→**100%**, branches 96.07%→**98.03%** (+1.96pp), funcs 100%, lines 99.15%→**100%**. Only uncovered: line 131 (mathematically unreachable defensive return).
 - **Tests:** 86 → **87** (+1), all GREEN ✅.

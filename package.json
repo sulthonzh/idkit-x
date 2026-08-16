@@ -45,7 +45,7 @@
     "url": "https://github.com/sulthonzh/idkit-x"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.31.0",
+    "@changesets/cli": "^3.0.0",
     "@types/node": "^24.0.0",
     "eslint": "^10.0.0",
     "tsx": "^4.0.0",
